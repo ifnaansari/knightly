@@ -45,4 +45,5 @@ flutter:
     - assets/background_image.jpg
     - assets/opponents_avatar.png
     - assets/users_avatar.png
+    - assets/user_account_icon.png
   uses-material-design: true

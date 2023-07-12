@@ -1,88 +1,181 @@
 import 'package:flutter/material.dart';
-
+import 'package:knightly/screens/options_screen.dart';
 class UserAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.black,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 50),
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/knightly_logo.png'),
-                  fit: BoxFit.cover,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background_image.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('assets/user_account_icon.png'),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Username',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
+              ),
+              SizedBox(height: 32),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditProfileScreen()),
+                  );
+                },
+                child: Text(
+                  'EDIT PROFILE',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              SizedBox(height: 8),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FriendsListScreen()),
+                  );
+                },
+                child: Text(
+                  'FRIENDS LIST',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              SizedBox(height: 8),
+              TextButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => LogoutPopupScreen(),
+                  );
+                },
+                child: Text(
+                  'LOGOUT',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class EditProfileScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background_image.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Edit Username',
+              ),
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Edit Password',
+              ),
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Confirm Password',
               ),
             ),
             SizedBox(height: 16),
-            Text(
-              'John Doe',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'john.doe@example.com',
-              style: TextStyle(
-                color: Colors.white.withOpacity(0.7),
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 32),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Icon(
-                  Icons.call,
-                  color: Colors.white,
-                  size: 24,
-                ),
-                Icon(
-                  Icons.email,
-                  color: Colors.white,
-                  size: 24,
-                ),
-                Icon(
-                  Icons.location_on,
-                  color: Colors.white,
-                  size: 24,
-                ),
-              ],
-            ),
-            SizedBox(height: 32),
-            Text(
-              'About',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                  'Nulla facilisi. Proin ac magna nulla. Sed at maximus nisi. '
-                  'Morbi eget mi vel elit pellentesque pellentesque. '
-                  'Nunc eleifend neque a ligula aliquet, et pretium tortor viverra.',
-              style: TextStyle(
-                color: Colors.white.withOpacity(0.7),
-                fontSize: 16,
-              ),
+            ElevatedButton(
+              onPressed: () {
+                // Save the changes
+              },
+              child: Text('Save'),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class FriendsListScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background_image.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Implement Friends List UI here
+              Text('Friends List'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LogoutPopupScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Logout'),
+      content: Text('Are you sure you want to logout?'),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => OptionsScreen()),
+                  (route) => false,
+            );
+          },
+          child: Text('Yes'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('No'),
+        ),
+      ],
     );
   }
 }
